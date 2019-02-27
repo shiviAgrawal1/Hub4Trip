@@ -59,6 +59,28 @@ class UserController extends Controller
           return response("no");
 
     }
+    public function login(Request $request)
+    {
+      $user = User::where('email',$request['email'])->first();
+      if($user->password==md5($request->password)){
+
+      User::update(['api_token'=>str_random(6)])->where('email','=',$user->email);
+      $api_token=User::where('email','=',$user->email)->get('api_token');
+       
+        return response()->json($api_token);
+     
+       }
+       return response("unauthenticated request! Please login again.");
+    }
+    //In login session compare with this token.
+
+     public function logout(Request $request)
+    {
+
+     $user = User::where('email',$request['email'])->get('email');
+     User::update(['api_token'=>'NULL'])->where('email','=',$user);
+     return response()->json("U r LogOut Successsfully!");
+    }
 
        
                                                                                      //update ur own profile or update by admin (but need restriction such that no one will be able to modify email as it is primary key and all depends on it, else need to care of redundancy)
