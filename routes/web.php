@@ -34,3 +34,17 @@ $router->put('/update_trip/{id}',['uses' => 'TripController@update']);
     
 
 
+    $router->get('tripparticipation/{id}', ['uses' => 'Trip_ParticipationController@search']);
+    $router->post('tripparticipation', ['uses' => 'Trip_ParticipationController@create']);
+    $router->delete('tripparticipation/{id}', ['uses' => 'Trip_ParticipationController@delete']);
+
+
+    $router->delete('schedule/{id}', ['uses' => 'Trip_scheduleController@delete']);
+    $router->post('schedule', ['uses' => 'Trip_scheduleController@create']);
+    $router->put('schedule/{id}', ['uses' => 'Trip_scheduleController@modify']);
+    
+    $router->delete('checkpoint/{id}', ['uses' => 'CheckpointController@delete']);
+    $router->post('checkpoint', ['uses' => 'CheckpointController@create']);
+    $router->put('checkpoint/{id}', ['uses' => 'CheckpointController@modify']);
+
+
